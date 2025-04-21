@@ -1,43 +1,43 @@
-# Faker Kütüphanesi Dokümantasyonu
+# Faker Library Documentation
 
-## Faker Nedir?
+## What is Faker?
 
-Faker, Python için geliştirilmiş bir sahte veri üretme kütüphanesidir. Gerçekçi görünen ancak tamamen rastgele üretilen veriler oluşturmak için kullanılır. Bu özelliği ile test verileri oluşturma, demo uygulamalar geliştirme ve veri gizleme gibi birçok alanda kullanılabilir.
+Faker is a Python library for generating fake data. It is used to create realistic-looking but completely random data for testing, demo applications, and data anonymization.
 
-## Temel Özellikler
+## Key Features
 
-1. **Çoklu Dil Desteği**: 20'den fazla dilde veri üretebilir
-2. **Zengin Veri Tipleri**: İsim, adres, telefon, e-posta, şirket bilgileri vb.
-3. **Özelleştirilebilir**: Kendi sağlayıcılarınızı ekleyebilirsiniz
-4. **Yerelleştirilmiş Veri**: Her dil için o dile özgü veri formatları
+1. **Multi-language Support**: Can generate data in over 20 languages
+2. **Rich Data Types**: Names, addresses, phone numbers, emails, company information, etc.
+3. **Customizable**: You can add your own providers
+4. **Localized Data**: Language-specific data formats for each supported language
 
-## Kurulum
+## Installation
 
 ```bash
 pip install Faker
 ```
 
-## Temel Kullanım
+## Basic Usage
 
 ```python
 from faker import Faker
 
-# Faker nesnesi oluştur
+# Create Faker object
 fake = Faker()
 
-# Türkçe veri üretmek için
+# For Turkish data
 fake_tr = Faker('tr_TR')
 
-# Temel veri üretme örnekleri
-print(fake.name())          # Rastgele isim
-print(fake.address())       # Rastgele adres
-print(fake.email())         # Rastgele e-posta
-print(fake.company())       # Rastgele şirket adı
-print(fake.job())           # Rastgele meslek
-print(fake.phone_number())  # Rastgele telefon numarası
+# Basic data generation examples
+print(fake.name())          # Random name
+print(fake.address())       # Random address
+print(fake.email())         # Random email
+print(fake.company())       # Random company name
+print(fake.job())           # Random job title
+print(fake.phone_number())  # Random phone number
 ```
 
-## İşe Alım Projesi için Örnek Kullanım
+## Example Usage for Job Application Project
 
 ```python
 from faker import Faker
@@ -49,24 +49,24 @@ def generate_applicant_data(n_samples):
     data = []
     for _ in range(n_samples):
         applicant = {
-            'ad_soyad': fake.name(),
-            'tecrube_yili': np.random.uniform(0, 10),
-            'teknik_puan': np.random.uniform(0, 100),
-            'universite': fake.company() + ' Üniversitesi',
-            'bolum': fake.job() + ' Mühendisliği',
+            'full_name': fake.name(),
+            'experience_years': np.random.uniform(0, 10),
+            'technical_score': np.random.uniform(0, 100),
+            'university': fake.company() + ' University',
+            'department': fake.job() + ' Engineering',
             'email': fake.email(),
-            'telefon': fake.phone_number()
+            'phone': fake.phone_number()
         }
         data.append(applicant)
     return data
 
-# 10 aday için veri üret
+# Generate data for 10 applicants
 applicants = generate_applicant_data(10)
 for applicant in applicants:
     print(applicant)
 ```
 
-## Özel Sağlayıcı Oluşturma
+## Creating Custom Providers
 
 ```python
 from faker import Faker
@@ -80,10 +80,10 @@ class CustomProvider(BaseProvider):
 fake = Faker()
 fake.add_provider(CustomProvider)
 
-print(fake.programming_language())  # Rastgele programlama dili
+print(fake.programming_language())  # Random programming language
 ```
 
-## Veri Seti Oluşturma ve CSV'ye Kaydetme
+## Creating and Saving Dataset to CSV
 
 ```python
 import pandas as pd
@@ -95,42 +95,42 @@ def generate_dataset(n_samples):
     data = []
     for _ in range(n_samples):
         row = {
-            'ad_soyad': fake.name(),
-            'tecrube_yili': np.random.uniform(0, 10),
-            'teknik_puan': np.random.uniform(0, 100),
-            'universite': fake.company() + ' Üniversitesi',
-            'bolum': fake.job() + ' Mühendisliği',
+            'full_name': fake.name(),
+            'experience_years': np.random.uniform(0, 10),
+            'technical_score': np.random.uniform(0, 100),
+            'university': fake.company() + ' University',
+            'department': fake.job() + ' Engineering',
             'email': fake.email(),
-            'telefon': fake.phone_number(),
-            'programlama_dili': fake.programming_language()
+            'phone': fake.phone_number(),
+            'programming_language': fake.programming_language()
         }
         data.append(row)
     return pd.DataFrame(data)
 
-# 100 aday için veri seti oluştur
+# Generate dataset for 100 applicants
 df = generate_dataset(100)
 
-# CSV'ye kaydet
-df.to_csv('aday_verileri.csv', index=False)
+# Save to CSV
+df.to_csv('applicant_data.csv', index=False)
 ```
 
-## Faker'ın Avantajları
+## Advantages of Faker
 
-1. **Gerçekçi Veri**: Üretilen veriler gerçek dünya verilerine benzer
-2. **Hızlı Veri Üretimi**: Büyük veri setleri hızlıca oluşturulabilir
-3. **Test Kolaylığı**: Test senaryoları için ideal
-4. **Gizlilik**: Gerçek veriler yerine sahte veriler kullanılabilir
-5. **Özelleştirilebilirlik**: İhtiyaca göre özelleştirilebilir
+1. **Realistic Data**: Generated data resembles real-world data
+2. **Fast Data Generation**: Large datasets can be created quickly
+3. **Testing Ease**: Ideal for test scenarios
+4. **Privacy**: Can be used instead of real data
+5. **Customizability**: Can be customized according to needs
 
-## Sınırlamalar
+## Limitations
 
-1. Veriler tamamen rastgele olduğu için gerçek veri setlerindeki korelasyonları yakalayamayabilir
-2. Bazı durumlarda veri tutarlılığı sağlamak zor olabilir
-3. Çok spesifik veri tipleri için özel sağlayıcılar gerekebilir
+1. Data is completely random, so it may not capture correlations present in real datasets
+2. Maintaining data consistency can be challenging in some cases
+3. Custom providers may be needed for very specific data types
 
-## İpuçları
+## Tips
 
-1. Veri üretirken seed değeri kullanarak tekrarlanabilirlik sağlayın
-2. Özel ihtiyaçlarınız için kendi sağlayıcılarınızı oluşturun
-3. Büyük veri setleri için generator pattern kullanın
-4. Veri tutarlılığı için ilişkili verileri birlikte üretin 
+1. Use seed values for reproducibility when generating data
+2. Create your own providers for specific needs
+3. Use generator pattern for large datasets
+4. Generate related data together for consistency 

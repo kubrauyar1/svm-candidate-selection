@@ -1,112 +1,112 @@
-# İşe Alımda Aday Seçimi: SVM ile Başvuru Değerlendirme
+# Job Applicant Selection: Application Evaluation with SVM
 
-Bu proje, yazılım geliştirici pozisyonu için başvuran adayların tecrübe yılı ve teknik sınav puanına göre işe alınıp alınmamasını tahmin eden bir makine öğrenmesi modeli içerir.
+This project contains a machine learning model that predicts whether job applicants should be hired based on their years of experience and technical exam score for software developer positions.
 
-## Proje Yapısı
+## Project Structure
 
 ```
 .
-├── src/                    # Kaynak kodlar
-│   ├── __init__.py        # Paket tanımı
-│   ├── main.py            # Ana çalıştırma dosyası
-│   ├── models/            # Model sınıfları
-│   │   └── svm_model.py   # SVM modeli
-│   ├── api/               # API kodları
-│   │   └── app.py         # FastAPI uygulaması
-│   └── utils/             # Yardımcı fonksiyonlar
-├── data/                  # Veri klasörü
-│   ├── raw/              # Ham veriler
-│   └── processed/        # İşlenmiş veriler
-├── docs/                  # Dokümantasyon
-├── tests/                 # Test dosyaları
-├── plots/                 # Görseller
-├── requirements.txt       # Bağımlılıklar
-└── README.md             # Proje dokümantasyonu
+├── src/                    # Source code
+│   ├── __init__.py        # Package definition
+│   ├── main.py            # Main execution file
+│   ├── models/            # Model classes
+│   │   └── svm_model.py   # SVM model
+│   ├── api/               # API code
+│   │   └── app.py         # FastAPI application
+│   └── utils/             # Utility functions
+├── data/                  # Data directory
+│   ├── raw/              # Raw data
+│   └── processed/        # Processed data
+├── docs/                  # Documentation
+├── tests/                 # Test files
+├── plots/                 # Visualizations
+├── requirements.txt       # Dependencies
+└── README.md             # Project documentation
 ```
 
-## Özellikler
+## Features
 
-- SVM (Support Vector Machine) kullanarak aday değerlendirme
-- Farklı kernel fonksiyonları ile deneyim (linear, rbf, poly, sigmoid)
-- Hyperparameter tuning (C ve gamma parametreleri)
-- FastAPI ile REST API servisi
-- Görselleştirme ve karar sınırı analizi
-- Otomatik görsel kaydetme ve raporlama
+- Job applicant evaluation using SVM (Support Vector Machine)
+- Experience with different kernel functions (linear, rbf, poly, sigmoid)
+- Hyperparameter tuning (C and gamma parameters)
+- REST API service with FastAPI
+- Visualization and decision boundary analysis
+- Automatic image saving and reporting
 
-## Kurulum
+## Installation
 
-1. Projeyi klonlayın:
+1. Clone the project:
 ```bash
-git clone https://github.com/kullanici_adi/proje_adi.git
-cd proje_adi
+git clone https://github.com/username/project_name.git
+cd project_name
 ```
 
-2. Sanal ortam oluşturun ve aktifleştirin:
+2. Create and activate virtual environment:
 ```bash
 python3 -m venv venv
 source venv/bin/activate  # Linux/Mac
-# veya
+# or
 .\venv\Scripts\activate  # Windows
 ```
 
-3. Gerekli paketleri yükleyin:
+3. Install required packages:
 ```bash
 pip install -r requirements.txt
 ```
 
-## Kullanım
+## Usage
 
-### Model Eğitimi ve Değerlendirme
+### Model Training and Evaluation
 
-Ana modeli çalıştırmak için:
+To run the main model:
 ```bash
 python src/main.py
 ```
 
-Bu komut:
-- Sentetik veri oluşturur
-- Modeli eğitir
-- Farklı kernel fonksiyonlarını dener
-- Hyperparameter tuning yapar
-- Karar sınırını görselleştirir
-- Kullanıcıdan girdi alarak tahmin yapar
-- Tüm görselleri `plots/` klasörüne kaydeder
+This command will:
+- Generate synthetic data
+- Train the model
+- Try different kernel functions
+- Perform hyperparameter tuning
+- Visualize decision boundaries
+- Take user input for predictions
+- Save all visualizations to the `plots/` directory
 
-### API Servisi
+### API Service
 
-API servisini başlatmak için:
+To start the API service:
 ```bash
 uvicorn src.api.app:app --reload
 ```
 
-API'yi test etmek için:
+To test the API:
 ```bash
 curl -X POST "http://localhost:8000/predict" \
      -H "Content-Type: application/json" \
-     -d '{"tecrube_yili": 3, "teknik_puan": 75}'
+     -d '{"experience_years": 3, "technical_score": 75}'
 ```
 
-## Model Kriterleri
+## Model Criteria
 
-Adaylar aşağıdaki kriterlere göre değerlendirilir:
-- Tecrübe < 2 yıl VE teknik puan < 60: İşe alınmaz (1)
-- Diğer durumlar: İşe alınır (0)
+Applicants are evaluated based on the following criteria:
+- Experience < 2 years AND technical score < 60: Not hired (1)
+- Other cases: Hired (0)
 
-## Görseller
+## Visualizations
 
-Model eğitimi sırasında oluşturulan görseller `plots/` klasöründe saklanır:
-- `linear_kernel_decision_boundary.png`: Linear kernel için karar sınırı
-- `rbf_parameter_performance.png`: RBF kernel için parametre performansı
-- `poly_parameter_performance.png`: Polynomial kernel için parametre performansı
-- `sigmoid_parameter_performance.png`: Sigmoid kernel için parametre performansı
-- `best_model_decision_boundary.png`: En iyi model için karar sınırı
+Visualizations created during model training are stored in the `plots/` directory:
+- `linear_kernel_decision_boundary.png`: Decision boundary for linear kernel
+- `rbf_parameter_performance.png`: Parameter performance for RBF kernel
+- `poly_parameter_performance.png`: Parameter performance for polynomial kernel
+- `sigmoid_parameter_performance.png`: Parameter performance for sigmoid kernel
+- `best_model_decision_boundary.png`: Decision boundary for best model
 
 ## API Endpoints
 
-- `GET /`: API hakkında bilgi
-- `POST /predict`: Aday değerlendirmesi yapar
+- `GET /`: Information about the API
+- `POST /predict`: Evaluates job applicants
 
-## Gereksinimler
+## Requirements
 
 - Python 3.8+
 - numpy
@@ -115,14 +115,14 @@ Model eğitimi sırasında oluşturulan görseller `plots/` klasöründe saklan�
 - fastapi
 - uvicorn
 
-## Katkıda Bulunma
+## Contributing
 
-1. Bu depoyu fork edin
-2. Yeni bir branch oluşturun (`git checkout -b feature/yeniOzellik`)
-3. Değişikliklerinizi commit edin (`git commit -am 'Yeni özellik eklendi'`)
-4. Branch'inizi push edin (`git push origin feature/yeniOzellik`)
-5. Pull Request oluşturun
+1. Fork this repository
+2. Create a new branch (`git checkout -b feature/newFeature`)
+3. Commit your changes (`git commit -am 'Added new feature'`)
+4. Push to the branch (`git push origin feature/newFeature`)
+5. Create a Pull Request
 
-## Lisans
+## License
 
-Bu proje MIT lisansı altında lisanslanmıştır. Detaylar için `LICENSE` dosyasına bakın. 
+This project is licensed under the MIT License. See the `LICENSE` file for details. 
